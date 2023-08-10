@@ -1,0 +1,38 @@
+version: '3.8'
+
+services: 
+  # Next App
+  client:
+    build:
+      context: ./apps/client
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+
+
+  # Nest App
+  server:
+    build:
+        context: ./apps/server
+        dockerfile: Dockerfile
+    ports:
+      - 3333:3333 
+
+
+  # PSQL DB
+  db:
+    image: postgres:14.8-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+    volumes: 
+      - db:/var/lib/postgresql/data 
+
+volumes:
+  db:
+    driver: local
+
+
