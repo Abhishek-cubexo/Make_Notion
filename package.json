@@ -5,7 +5,11 @@
   "scripts": {
     "client:dev": "nx serve client",
     "server:dev": "nx serve server",
-    "dev": "nx run-many --target=serve --projects=server,client --parallel"
+    "dev": "nx run-many --target=serve --projects=server,client --parallel",
+    "server:build": "nest build",
+    "server:start": "nest start",
+    "server:start:dev": "nest start --watch",
+    "server:start:debug": "nest start --debug --watch"
   },
   "private": true,
   "dependencies": {

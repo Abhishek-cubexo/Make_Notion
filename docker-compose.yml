@@ -1,22 +1,26 @@
 version: '3.8'
 
-services: 
+services:
   # Next App
   client:
     build:
-      context: ./apps/client
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: apps/Dockerfile
+    entrypoint: ["nx", "serve", "client"]
+
     ports:
-      - 3000:3000
+      - 4200:4200
 
 
   # Nest App
   server:
     build:
-        context: ./apps/server
-        dockerfile: Dockerfile
+        context: .
+        dockerfile: apps/Dockerfile
+
+    entrypoint: ["nx", "serve", "server"]
     ports:
-      - 3333:3333 
+      - 3333:3333
 
 
   # PSQL DB
@@ -28,8 +32,8 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - '5432:5432'
-    volumes: 
-      - db:/var/lib/postgresql/data 
+    volumes:
+      - db:/var/lib/postgresql/data
 
 volumes:
   db:
